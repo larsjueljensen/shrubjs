@@ -1,4 +1,4 @@
-window.Tree = (function () {
+(function (shrub) {
 
     'use strict';
 
@@ -65,6 +65,8 @@ window.Tree = (function () {
         return tree;
     };
 
-    return Tree;
-}());
+    shrub.createTree = function (value) {
+      return new Tree(value);
+    };
 
+}(shrub || {}));
