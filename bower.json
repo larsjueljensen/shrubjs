@@ -1,0 +1,17 @@
+{
+  "name": "shrubjs",
+  "authors": [
+    "Lars Juel Jensen <larsjueljens@gmail.com>"
+  ],
+  "description": "A tree data structure for javascript",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
