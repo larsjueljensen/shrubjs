@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Shrub-js spec runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="bower_components/jasmine-core/images/jasmine_favicon.png">
+  <link rel="stylesheet" href="bower_components/jasmine-core/lib/jasmine-core/jasmine.css">
+
+  <style>
+    .jasmine_html-reporter .jasmine-banner .jasmine-title {
+        background: url('images/shrub-testrunner.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+  </style>
+
+  <script src="bower_components/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+  <script src="bower_components/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="bower_components/jasmine-core/lib/jasmine-core/boot.js"></script>
+
+  <!-- include source files here... -->
+  <script src="src/common.js"></script>
+  <script src="src/tree.js"></script>
+  <script src="src/btree.js"></script>
+
+  <!-- include spec files here... -->
+  <script src="spec/treespec.js"></script>
+  <script src="spec/btreespec.js"></script>
+
+</head>
+
+<body>
+</body>
+</html>

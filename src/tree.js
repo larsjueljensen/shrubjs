@@ -1,4 +1,4 @@
-(function (shrub) {
+window.shrub = (function (shrub) {
 
     'use strict';
 
@@ -16,6 +16,10 @@
         CHILDREN_FIRST: {},
         LEVEL_ORDER: {}
     });
+
+    Tree.prototype.TRAVERSE_MODE = function () {
+        return Tree.TRAVERSE_MODE;
+    };
 
     Tree.prototype.isRoot = function () {
         return JSON.stringify(this.parent === '{}');
@@ -42,12 +46,15 @@
             queue.push(this);
 
             (function () {
+
+                var node;
+
                 function push(element) {
                     queue.push(element);
                 }
 
                 while (queue.length > 0) {
-                    var node = queue.shift();
+                    node = queue.shift();
                     callback(node);
                     node.children.forEach(push);
                 }
@@ -66,7 +73,9 @@
     };
 
     shrub.createTree = function (value) {
-      return new Tree(value);
+        return new Tree(value);
     };
 
-}(shrub || {}));
+    return shrub;
+
+}(window.shrub || {}));
