@@ -6,7 +6,7 @@
     describe('general tree structure', function () {
         it('can create a new tree', function () {
             expect(shrub.createTree).toEqual(jasmine.any(Function));
-            expect(shrub.createTree('root')).toEqual(jasmine.objectContaining({value: 'root', parent: {}, children: [], level: 0}));
+            expect(shrub.createTree('root')).toEqual(jasmine.objectContaining({value: 'root', parent: null, children: [], level: 0}));
         });
         it('can add children', function () {
             var root = shrub.createTree('root'),
@@ -49,6 +49,28 @@
             });
 
             expect(result).toEqual(['root', 'A', 'B', 'A-A', 'A-B', 'B-A', 'B-B']);
+        });
+        it('can create path from root', function () {
+
+            var articles = shrub.createTree('articles'),
+                supplier = articles
+                    .add(':articleNumber')
+                    .add('primarygroup').parent
+                    .add('module').parent
+                    .add('linediscountgroup').parent
+                    .add('texts').parent
+                    .add('supplierarticles')
+                        .add(':id')
+                        .add('supplier');
+
+            expect(supplier.pathFromRoot())
+                .toEqual([
+                    'articles',
+                    ':articleNumber',
+                    'supplierarticles',
+                    ':id',
+                    'supplier'
+                ]);
         });
     });
 }());

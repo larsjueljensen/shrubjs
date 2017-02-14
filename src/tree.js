@@ -1,3 +1,4 @@
+/*global window*/
 window.shrub = (function (shrub) {
 
     'use strict';
@@ -5,7 +6,7 @@ window.shrub = (function (shrub) {
     function Tree(value) {
 
         this.value = value;
-        this.parent = {};
+        this.parent = null;
         this.children = [];
         this.level = 0;
 
@@ -22,12 +23,24 @@ window.shrub = (function (shrub) {
     };
 
     Tree.prototype.isRoot = function () {
-        return JSON.stringify(this.parent === '{}');
+        return this.parent === null;
     };
 
     Tree.prototype.isLeaf =  function () {
         return this.children.length > 0;
     };
+
+    Tree.prototype.pathFromRoot = function() {
+        var current = this,
+            path = [];
+
+        while (current.isRoot() === false) {
+            path.push(current.value);
+            current = current.parent;
+        }
+        path.push(current.value);
+        return path.reverse();
+    }
 
     Tree.prototype.traverse = function (mode, callback) {
         if (Tree.TRAVERSE_MODE.CHILDREN_FIRST === mode) {
