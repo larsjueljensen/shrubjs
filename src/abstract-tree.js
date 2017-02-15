@@ -75,10 +75,6 @@ window.shrub = (function (shrub) {
         }
     };
 
-    Tree.prototype.find = function (value) {
-
-    }
-
     Tree.prototype.add = function (value) {
 
         var tree = new Tree(value);
@@ -88,14 +84,6 @@ window.shrub = (function (shrub) {
 
         return tree;
     };
-
-    Tree.prototype.toJSON = function () {
-        return {
-            value: this.value,
-            children: this.children,
-            level: this.level
-        };
-    }
 
     shrub.Tree = Tree;
     return shrub;

@@ -11,7 +11,7 @@
         });
 
         it('can add to tree', function () {
-            var root = shrub.createTree('root'),
+            var root = new shrub.Tree('root'),
                 child1 = root.add('child - 1'),
                 child2 = root.add('child - 2');
             expect(root.children.length).toBe(2);

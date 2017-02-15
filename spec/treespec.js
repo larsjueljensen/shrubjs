@@ -5,11 +5,11 @@
 
     describe('general tree structure', function () {
         it('can create a new tree', function () {
-            expect(shrub.createTree).toEqual(jasmine.any(Function));
-            expect(shrub.createTree('root')).toEqual(jasmine.objectContaining({value: 'root', parent: null, children: [], level: 0}));
+            expect(shrub.Tree).toEqual(jasmine.any(Function));
+            expect(new shrub.Tree('root')).toEqual(jasmine.objectContaining({value: 'root', parent: null, children: [], level: 0}));
         });
         it('can add children', function () {
-            var root = shrub.createTree('root'),
+            var root = new shrub.Tree('root'),
                 child1 = root.add('child - 1'),
                 child2 = root.add('child - 2');
             expect(root.children.length).toBe(2);
@@ -18,7 +18,7 @@
             expect(child1.level).toBe(1);
         });
         it('can traverse with root first order', function () {
-            var result = [], root = shrub.createTree('root');
+            var result = [], root = new shrub.Tree('root');
             root
                 .add('A').add('A-A').parent.add('A-B').parent.parent
                 .add('B').add('B-A').parent.add('B-B');
@@ -29,7 +29,7 @@
             expect(result).toEqual(['root', 'A', 'A-A', 'A-B', 'B', 'B-A', 'B-B']);
         });
         it('can traverse with children first order', function () {
-            var result = [], root = shrub.createTree('root');
+            var result = [], root = new shrub.Tree('root');
             root
                 .add('A').add('A-A').parent.add('A-B').parent.parent
                 .add('B').add('B-A').parent.add('B-B');
@@ -40,7 +40,7 @@
             expect(result).toEqual(['A-A', 'A-B', 'A', 'B-A', 'B-B', 'B', 'root']);
         });
         it('can traverse with level order', function () {
-            var result = [], root = shrub.createTree('root');
+            var result = [], root = new shrub.Tree('root');
             root
                 .add('A').add('A-A').parent.add('A-B').parent.parent
                 .add('B').add('B-A').parent.add('B-B');
@@ -52,7 +52,7 @@
         });
         it('can create path from root', function () {
 
-            var articles = shrub.createTree('articles'),
+            var articles = new shrub.Tree('articles'),
                 supplier = articles
                     .add(':articleNumber')
                     .add('primarygroup').parent
@@ -71,6 +71,19 @@
                     ':id',
                     'supplier'
                 ]);
+        });
+        it('can run inside shrub', function () {
+            shrub(function ($) {
+                expect($).toEqual(shrub);
+            });
+        });
+        it('can convert tree with more than one level to JSON', function () {
+            shrub(function ($) {
+                var root = new $.Tree('root');
+                root.add('A');
+                root.add('B');
+                console.log(JSON.stringify(root));
+            });
         });
     });
 }());

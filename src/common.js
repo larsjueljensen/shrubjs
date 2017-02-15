@@ -3,6 +3,14 @@ window.shrub = (function (shrub) {
 
     'use strict';
 
+    shrub = function (callback) {
+        callback(shrub);
+    }
+
+    shrub.isEqual = function (a, b) {
+        return JSON.stringify(a) === JSON.stringify(b);
+    };
+
     shrub.isEmptyObject = function (obj) {
         return JSON.stringify(obj) === '{}';
     };
