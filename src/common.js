@@ -5,25 +5,23 @@ window.shrub = (function (shrub) {
 
     shrub = function (callback) {
         callback(shrub);
-    }
+    };
 
     shrub.isEqual = function (a, b) {
         return JSON.stringify(a) === JSON.stringify(b);
     };
 
+    shrub.isNotEqual = function (a, b) {
+        return !shrub.isEqual(a, b);
+    };
+
     shrub.isEmptyObject = function (obj) {
-        return JSON.stringify(obj) === '{}';
+        return Object.keys(obj).length === 0 && obj.constructor === Object;
     };
 
     shrub.isNotEmptyObject = function (obj) {
         return !shrub.isEmptyObject(obj);
     };
-
-    shrub.TRAVERSE_MODE = Object.freeze({
-        ROOT_FIRST: {},
-        CHILDREN_FIRST: {},
-        LEVEL_ORDER: {}
-    });
 
     return shrub;
 
